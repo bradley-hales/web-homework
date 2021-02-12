@@ -7,6 +7,7 @@ defmodule Homework.Users do
   alias Homework.Repo
 
   alias Homework.Users.User
+  alias Homework.Companies.Company
 
   @doc """
   Returns the list of users.
@@ -38,6 +39,25 @@ defmodule Homework.Users do
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
+  Gets multiple users based off of company id.
+
+  Raises `Ecto.NoResultsError` if no Users have the company id.
+
+  ## Examples
+
+      iex> get_users_by_company_id!(123)
+      [%User{}, ...]
+
+      iex> get_users_by_company_id!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_users_by_company_id!(company_id) do
+    User
+     |> where(company_id: ^company_id)
+  end
+
+  @doc """
   Creates a user.
 
   ## Examples
@@ -49,6 +69,7 @@ defmodule Homework.Users do
       {:error, %Ecto.Changeset{}}
 
   """
+  # may have to change back to %Company{} = company
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)

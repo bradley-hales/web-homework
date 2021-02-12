@@ -1,5 +1,5 @@
 defmodule HomeworkWeb.UserSocket do
-  use Phoenix.Socket
+  use Phoenix.Socket, schema: HomeworkWeb.Schema
 
   ## Channels
   # channel "room:*", HomeworkWeb.RoomChannel
